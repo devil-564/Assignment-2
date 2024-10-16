@@ -1,4 +1,4 @@
-﻿using ClosedXML.Excel;
+using ClosedXML.Excel;
 
 namespace Temp
 {
@@ -10,9 +10,6 @@ namespace Temp
 
             using (var workbook = new XLWorkbook(FileName))
             {
-                int counter = 0;
-                string CheckPoint;
-                string CheckPoint1;
 
                 Dictionary<string, string> dict1 = new Dictionary<string, string>();
                 Dictionary<string, string> dict2 = new Dictionary<string, string>();
@@ -21,7 +18,11 @@ namespace Temp
                 var sheet1 = workbook.Worksheet(1);
                 var sheet2 = workbook.Worksheet(2);
 
-                for(int i = 1; i < 313; i++)
+                var ColumnLength1 = sheet1.FirstColumn().CellsUsed().Count();
+                var ColumnLength2 = sheet2.FirstColumn().CellsUsed().Count();
+
+
+                for (int i = 1; i < ColumnLength1; i++)
                 {
                     string name = $"B{i}";
                     string pass = $"C{i}";
@@ -29,7 +30,7 @@ namespace Temp
                     dict1[sheet1.Cell(name).Value.ToString()] = sheet1.Cell(pass).Value.ToString();
                 }
 
-                for (int i = 1; i < 343; i++)
+                for (int i = 1; i < ColumnLength2; i++)
                 {
                     string name = $"B{i}";
                     string pass = $"C{i}";
